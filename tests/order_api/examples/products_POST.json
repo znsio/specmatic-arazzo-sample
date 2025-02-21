@@ -1,0 +1,26 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/products",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "Authenticate": "API-TOKEN"
+            },
+            "body": "$(CONFIG.post.Product)"
+        },
+        "http-response": {
+            "status": 201,
+            "body": {
+                "id": "(anyvalue)",
+                "name": "$(REQUEST.BODY.name)",
+                "type": "$(REQUEST.BODY.type)",
+                "inventory": "$(REQUEST.BODY.inventory)"
+            },
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

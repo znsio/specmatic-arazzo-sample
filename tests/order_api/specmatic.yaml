@@ -1,0 +1,12 @@
+version: 2
+contracts:
+  - git:
+      branch: uuid_sample
+      url: https://github.com/znsio/specmatic-order-contracts.git
+    provides:
+      - io/specmatic/examples/store/openapi/api_order_v4.yaml
+
+examples: 
+  - tests/order_api/examples
+
+additionalExampleParamsFilePath: tests/order_api/config.json

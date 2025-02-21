@@ -1,0 +1,31 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/orders/(ID:number)",
+            "method": "PATCH",
+            "headers": {
+                "Content-Type": "application/json",
+                "Authenticate": "API-TOKEN",
+                "UUID": "(uuid)"
+            },
+            "body": {
+                "productId": "(PRODUCT_ID:number)",
+                "count": "(COUNT:number)",
+                "status": "(STATUS:OrderStatus)"
+            }
+        },
+        "http-response": {
+            "status": 200,
+            "body": {
+                "id": "$(ID)",
+                "productId": "$(PRODUCT_ID)",
+                "count": "$(COUNT)",
+                "status": "$(STATUS)"
+            },
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

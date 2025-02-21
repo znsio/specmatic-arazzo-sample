@@ -1,0 +1,22 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/products/$(ID:number)",
+            "method": "GET",
+            "headers": {
+                "Authenticate": "API-TOKEN",
+                "UUID": "(uuid)"
+            }
+        },
+        "http-response": {
+            "status": 200,
+            "body": {
+                "id": "$(ID)"
+            },
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

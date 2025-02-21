@@ -1,0 +1,26 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/orders",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "Authenticate": "API-TOKEN"
+            },
+            "body": "$(CONFIG.post.Order)"
+        },
+        "http-response": {
+            "status": 201,
+            "body": {
+                "id": "(anyvalue)",
+                "productId": "$(REQUEST.BODY.productId)",
+                "count": "$(REQUEST.BODY.count)",
+                "status": "$(REQUEST.BODY.status)"
+            },
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "http-request": {
+        "path": "/orders/(ID:number)",
+        "method": "DELETE",
+        "headers": {
+            "Authenticate": "API-TOKEN",
+            "UUID": "(uuid)"
+        }
+    },
+    "http-response": {
+        "status": 204,
+        "status-text": "OK",
+        "headers": {
+            "Content-Type": "text/plain"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+arazzo: 1.0.0
+sourceDescriptions:
+  - name: OrderApi
+    url: ../central_repo/io/specmatic/examples/store/openapi/api_order_v4.yaml
+    type: openapi
+  - name: UuidApi
+    url: ../central_repo/io/specmatic/examples/store/openapi/api_uuid_v1.yaml
+    type: openapi
+workflows:
+  - workflowId: PlaceOrder
+    steps:
+      - stepId: GetUUID
+        operationId: $sourceDescriptions.UuidApi.CreateUuid
+      - stepId: RetrieveProductDetails
+        operationId: $sourceDescriptions.OrderApi.getProductById
+      - stepId: PlaceOrder
+        operationId: $sourceDescriptions.OrderApi.postOrders

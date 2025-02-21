@@ -1,0 +1,12 @@
+sources:
+  - provider: git
+    branch: uuid_sample
+    repository: https://github.com/znsio/specmatic-order-contracts.git
+    provides:
+      - io/specmatic/examples/store/openapi/api_uuid_v1.yaml
+
+
+examples: 
+  - tests/uuid_api/examples
+
+additionalExampleParamsFilePath: tests/uuid_api/config.json

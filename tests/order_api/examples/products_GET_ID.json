@@ -1,0 +1,22 @@
+{
+    "http-request": {
+        "path": "/products/$(ENTITY.id)",
+        "method": "GET",
+        "headers": {
+            "Authenticate": "API-TOKEN"
+        }
+    },
+    "http-response": {
+        "status": 200,
+        "body": {
+            "id": "$(ENTITY.id)",
+            "name": "$(ENTITY.name)",
+            "type": "$(ENTITY.type)",
+            "inventory": "$(ENTITY.inventory)"
+        },
+        "status-text": "OK",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/uuids",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": "$(CONFIG.post.Uuid)"
+        },
+        "http-response": {
+            "status": 201,
+            "body": {
+                "firstName": "$(REQUEST.BODY.firstName)",
+                "lastName": "$(REQUEST.BODY.lastName)",
+                "email": "$(REQUEST.BODY.email)",
+                "uuidType": "$(REQUEST.BODY.uuidType)",
+                "uuid": "(anyvalue)"
+            },
+            "status-text": "Created",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/orders",
+            "method": "GET",
+            "query": {
+                "status": "(STATUS:OrderStatus)"
+            },
+            "headers": {
+                "Authenticate": "API-TOKEN",
+                "UUID": "(uuid)"
+            }
+        },
+        "http-response": {
+            "status": 200,
+            "body": [
+                {
+                    "status": "$(STATUS)"
+                }
+            ],
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

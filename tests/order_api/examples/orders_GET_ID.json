@@ -1,0 +1,24 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/orders/$(ENTITY.id)",
+            "method": "GET",
+            "headers": {
+                "Authenticate": "API-TOKEN"
+            }
+        },
+        "http-response": {
+            "status": 200,
+            "body": {
+                "id": "$(ENTITY.id)",
+                "productId": "${ENTITY.productId}",
+                "count": "${ENTITY.count}",
+                "status": "${ENTITY.status}"
+            },
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/uuids/$(ENTITY.uuidType)/$(ENTITY.uuid)",
+            "method": "PATCH",
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "body": {
+                "firstName": "$rand(CONFIG.patch.Uuid.firstName)",
+                "lastName": "$rand(CONFIG.patch.Uuid.lastName)",
+                "email": "$rand(CONFIG.patch.Uuid.email)",
+                "uuidType": "$rand(CONFIG.patch.Uuid.uuidType)"
+            }
+        },
+        "http-response": {
+            "status": 200,
+            "body": {
+                "firstName": "$eq(REQUEST.BODY.firstName)",
+                "lastName": "$eq(REQUEST.BODY.lastName)",
+                "email": "$eq(REQUEST.BODY.email)",
+                "uuidType": "$eq(REQUEST.BODY.uuidType)",
+                "uuid": "$eq(ENTITY.uuid)"
+            },
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

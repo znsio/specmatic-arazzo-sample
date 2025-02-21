@@ -1,0 +1,4 @@
+[submodule "central_repo"]
+	path = central_repo
+	url = https://github.com/znsio/specmatic-order-contracts.git
+	branch = uuid_sample

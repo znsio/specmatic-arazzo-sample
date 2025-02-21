@@ -1,0 +1,37 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/products",
+            "method": "GET",
+            "query": {
+                "type": "$(ENTITY.type)"
+            },
+            "headers": {
+                "Authenticate": "API-TOKEN"
+            }
+        },
+        "http-response": {
+            "status": 200,
+            "body": [
+                {
+                    "type": "$eq(REQUEST.QUERY-PARAMS.type)",
+                    "id": "$array_has(ENTITY.id)",
+                    "$if": {
+                        "$conditions": {
+                            "id": "$eq(ENTITY.id)"
+                        },
+                        "$then": {
+                            "name": "$(ENTITY.name)",
+                            "type": "$(ENTITY.type)",
+                            "inventory": "$(ENTITY.inventory)"
+                        }
+                    }
+                }
+            ],
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

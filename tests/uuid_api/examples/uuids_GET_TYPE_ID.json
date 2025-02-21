@@ -1,0 +1,22 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/uuids/$(ENTITY.uuidType)/$(ENTITY.uuid)",
+            "method": "GET"
+        },
+        "http-response": {
+            "status": 200,
+            "body": {
+                "firstName": "$eq(ENTITY.firstName)",
+                "lastName": "$eq(ENTITY.lastName)",
+                "email": "$eq(ENTITY.email)",
+                "uuidType": "$eq(ENTITY.uuidType)",
+                "uuid": "$eq(ENTITY.uuid)"
+            },
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

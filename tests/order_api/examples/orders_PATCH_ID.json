@@ -1,0 +1,31 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/orders/$(ENTITY.id)",
+            "method": "PATCH",
+            "headers": {
+                "Content-Type": "application/json",
+                "Authenticate": "API-TOKEN"
+            },
+            "body": {
+                "id": "$eq(ENTITY.id)",
+                "productId": "$rand(CONFIG.patch.Order.productId)",
+                "count": "$rand(CONFIG.patch.Order.count)",
+                "status": "$rand(CONFIG.patch.Order.status)"
+            }
+        },
+        "http-response": {
+            "status": 200,
+            "body": {
+                "id": "$(ENTITY.id)",
+                "productId": "$eq(REQUEST.BODY.productId)",
+                "count": "$eq(REQUEST.BODY.count)",
+                "status": "$eq(REQUEST.BODY.status)"
+            },
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

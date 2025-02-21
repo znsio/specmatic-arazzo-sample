@@ -1,0 +1,29 @@
+{
+    "post": {
+        "Product": {
+            "name": "Laptop",
+            "type": "gadget",
+            "inventory": 10
+        },
+        "Order": {
+            "productId": 1,
+            "count": 10,
+            "status": "pending"
+        }
+    },
+    "patch": {
+        "Product": {
+            "name": ["M1Abrams", "Apple"],
+            "type": ["other", "food"],
+            "inventory": [1, 100]
+        },
+        "Order": {
+            "productId": [1, 2],
+            "count": [10, 20],
+            "status": ["pending", "cancelled"]
+        }
+    },
+    "headers": {
+        "UUID": "2CA263F1-5C94-11E0-84CC-002170FBAC5B"
+    }
+}

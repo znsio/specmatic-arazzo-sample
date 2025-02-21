@@ -1,0 +1,34 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/uuids",
+            "method": "GET",
+            "query": {
+                "uuidType": "$(ENTITY.uuidType)"
+            }
+        },
+        "http-response": {
+            "status": 200,
+            "body": [
+                {   
+                    "uuidType": "$eq(REQUEST.QUERY-PARAMS.uuidType)",
+                    "uuid": "$array_has(ENTITY.uuid)",
+                    "$if": {
+                        "$conditions": {
+                            "id": "$eq(ENTITY.id)"
+                        },
+                        "$then": {
+                            "firstName": "$(ENTITY.firstName)",
+                            "lastName": "$(ENTITY.lastName)",
+                            "email": "$(ENTITY.email)"
+                        }
+                    }
+                }
+            ],
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

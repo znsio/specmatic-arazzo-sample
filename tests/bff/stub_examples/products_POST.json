@@ -1,0 +1,30 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/products",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "Authenticate": "API-TOKEN",
+                "UUID": "(uuid)"
+            },
+            "body": {
+                "name": "(NAME:string)",
+                "type": "(TYPE:ProductType)",
+                "inventory": "(INVENTORY:number)"
+            }
+        },
+        "http-response": {
+            "status": 201,
+            "body": {
+                "name": "$(NAME)",
+                "type": "$(TYPE)",
+                "inventory": "$(INVENTORY)"
+            },
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "application/json"
+            }
+        }
+    }
+}

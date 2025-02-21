@@ -1,0 +1,14 @@
+version: 2
+contracts:
+  - filesystem:
+    provides:
+    - uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
+  - filesystem:
+      directory: central_repo
+    consumes:
+    - specs:
+        - io/specmatic/examples/store/openapi/api_order_v4.yaml
+      port: 5000
+    - specs:
+        - io/specmatic/examples/store/openapi/api_uuid_v1.yaml
+      port: 9000

@@ -1,0 +1,18 @@
+{
+    "post": {
+        "Uuid": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "email": "john.doe@example.com",
+            "uuidType": "Regular"
+        }
+    },
+    "patch": {
+        "Uuid": {
+            "firstName": ["Jane", "Jason"],
+            "lastName": ["Doe", "Smith"],
+            "email": ["john.doe@example.com", "jason.smith@example.com"],
+            "uuidType": ["Enterprise", "Premium"]
+        }
+    }
+}

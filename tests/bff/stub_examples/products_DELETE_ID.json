@@ -1,0 +1,19 @@
+{
+    "partial": {
+        "http-request": {
+            "path": "/products/(ID:number)",
+            "method": "DELETE",
+            "headers": {
+                "Authenticate": "API-TOKEN",
+                "UUID": "(uuid)"
+            }
+        },
+        "http-response": {
+            "status": 204,
+            "status-text": "OK",
+            "headers": {
+                "Content-Type": "text/plain"
+            }
+        }
+    }
+}
