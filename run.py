@@ -59,6 +59,7 @@ if __name__ == "__main__":
     services = {
         "UUID Service": ["uvicorn", "uuid_api:app", "--host", "127.0.0.1", "--port", "9000"],
         "Order Service": ["uvicorn", "order_api:app", "--host", "127.0.0.1", "--port", "5000"],
+        "BFF Service": ["uvicorn", "bff:app", "--host", "127.0.0.1", "--port", "3000"],
     }
 
     active_processes = [subprocess.Popen(command, cwd=BASE_DIR) for command in services.values()]
