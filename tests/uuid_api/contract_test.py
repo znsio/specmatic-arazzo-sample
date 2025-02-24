@@ -3,7 +3,8 @@ import pathlib
 import pytest
 from specmatic.core.specmatic import Specmatic
 
-from uuid_api import ROOT_DIR, app
+from tests import ROOT_DIR
+from uuid_api import app
 
 SPECMATIC_CONFIG = str(pathlib.Path(__file__).parent / "specmatic.yaml")
 DB_FILE = ROOT_DIR.parent / "uuid.db"

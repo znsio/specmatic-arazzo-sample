@@ -11,25 +11,25 @@ All services are developed using **FastAPI**, **SQLModel**, and **SQLite** as th
 
 ### Setting Up Virtual Environment
 #### On Unix/macOS:
-```sh
+```shell
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 #### On Windows (Command Prompt):
-```sh
+```shell
 python -m venv venv
 venv\Scripts\activate
 ```
 
 ### Installing Dependencies
-```sh
+```shell
 pip install -r requirements.txt
 ```
 
 ## Running the Services
 Execute the `run.py` script located in the root directory to initialize all three services, which will also populate the database with product data.
-```sh
+```shell
 python run.py
 ```
 
@@ -42,11 +42,11 @@ This project uses `pytest` and `Specmatic` for contract testing.
 ### Running Unit Tests
 
 - To run all tests:
-  ```sh
+  ```shell
   pytest -v -s
   ```
 - To run tests for an individual service execute:
-  ```sh
+  ```shell
   pytest tests/<service_folder> -v -s
   ```
 
