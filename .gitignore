@@ -4,3 +4,4 @@ database.db
 build/
 workflow/*_extrapolated*
 .idea
+.specmatic

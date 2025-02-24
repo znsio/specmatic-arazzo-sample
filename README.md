@@ -7,6 +7,23 @@ This project consists of three microservices:
 
 All services are developed using **FastAPI**, **SQLModel**, and **SQLite** as the database system.
 
+## Cloning the Repository
+
+1. Clone the repository
+```shell
+git clone https://github.com/znsio/specmatic-arazzo-sample.git
+```
+
+2. Initialize and update the specmatic-order-contracts submodule
+```shell
+git submodule update --init --recursive --remote
+```
+
+3. Enable automatic submodule updating when executing git pull
+```shell
+git config submodule.recurse true
+```
+
 ## Setup Instructions
 
 ### Setting Up Virtual Environment
