@@ -44,12 +44,6 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Running the Services
-Execute the `run.py` script located in the root directory to initialize all three services, which will also populate the database with product data.
-```shell
-python run.py
-```
-
 ## Service Interactions
 The **BFF** service sends a request to the **UUID API** to retrieve a UUID for a customer based on the request payload. It subsequently uses this UUID to make a request to the **Order API**.
 
@@ -67,8 +61,65 @@ This project uses `pytest` and `Specmatic` for contract testing.
   pytest tests/<service_folder> -v -s
   ```
 
-### Workflow Specification
-The `workflow/` directory includes a **minimal Arazzo specification**. Execute the extrapolate command on this minimal specification with `specmatic arazzo`, then validate it using the same tool. After that, you can run the tests and generate examples as well as an HTML report.
+## Workflow Specification
 
-## Note
-Ensure that input values in arrazo inputs file match the **seed data** from `run.py` to get accurate results.
+The `workflow/` directory contains a minimal Arazzo specification. The following instructions assume that you have the Specmatic Arazzo JAR file available and have aliased it as `specmatic-arazzo`.
+
+### Navigate to the `workflow/` Directory
+
+```shell
+cd workflow/
+```
+
+### Extrapolating the Specification
+
+Specmatic Arazzo can extrapolate a complete specification from the minimal one by filling in missing parameters, request bodies, and defining success and failure actions and outputs. To perform the extrapolation, execute:
+
+```shell
+specmatic-arazzo extrapolate --spec=uuid_order_workflow.arazzo.yaml
+```
+After executing this command, you should see two new files generated in the `workflow/` directory:
+
+1.  **Extrapolated Specification:** `uuid_order_workflow.arazzo_extrapolated.arazzo.yaml`
+2.  **Generated Inputs File:** `uuid_order_workflow.arazzo_extrapolated.arazzo_input.json`
+
+### Validating the Specification
+
+Once the specification is extrapolated, validate it to ensure that all parameters, request bodies, schemas, outputs, and actions are correctly defined. Run the following command to validate the extrapolated specification:
+
+```shell
+specmatic-arazzo validate --spec=uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
+```
+
+**Tip:** For testing purposes, consider modifying the `email` field in the workflow inputs by removing its format specification. This alteration should trigger a validation failure, demonstrating the effectiveness of the validation process.
+
+### Running the Workflow
+
+Before executing the workflow tests, verify that the input values in the Arazzo inputs file correspond with the seed data specified in `run.py`.
+The `productId` in `PlaceOrder` and the `id` in `RetrieveProductDetails` should be set to either 1 or 2.
+
+#### Initialize Services and Populate Data
+Execute the `run.py` script from the root directory to initialize the required services and populate the database with product data:
+
+```shell
+python run.py
+```
+
+#### Execute Workflow Tests
+After initializing the services, run the workflow tests using `Specmatic Arazzo`. From within the `/workflow` directory, execute:
+
+```shell
+specmatic-arazzo test
+```
+
+Upon completion of the tests, a detailed HTML report will be generated in the `workflow/build/reports/specmatic/html/index.html` directory. 
+This report provides a comprehensive overview of the test outcomes, including a workflow diagram and additional information.
+
+### Generating Examples
+To generate examples from the extrapolated specification, run the following command:
+
+```shell
+specmatic-arazzo examples --spec=uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
+```
+
+The generated examples will be placed in the parent directory of the specifications, specifically in the `central-repo` submodule folder.
