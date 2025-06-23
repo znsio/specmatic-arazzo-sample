@@ -14,7 +14,7 @@
             "status": 200,
             "body": [
                 {
-                    "status": "$eq(REQUEST.QUERY-PARAMS.status)",
+                    "status": "$eq(REQUEST.PARAMETERS.QUERY.status)",
                     "id": "$array_has(ENTITY.id)",
                     "$if": {
                         "$conditions": {

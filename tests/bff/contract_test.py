@@ -15,7 +15,7 @@ class TestBffContract:
 
 Specmatic().with_specmatic_config_file_path(SPECMATIC_CONFIG).with_asgi_app(
     "bff:app",
-).with_stub(stub_port=8080, stub_host="localhost", expectations=list(EXAMPLES_DIR.iterdir())).test_with_api_coverage_for_fastapi_app(
+).with_stub(expectations=list(EXAMPLES_DIR.iterdir())).test_with_api_coverage_for_fastapi_app(
     TestBffContract,
     app,
 ).run()

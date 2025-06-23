@@ -11,9 +11,9 @@
             "status": 200,
             "body": {
                 "id": "$(ENTITY.id)",
-                "productId": "${ENTITY.productId}",
-                "count": "${ENTITY.count}",
-                "status": "${ENTITY.status}"
+                "productId": "$(ENTITY.productId)",
+                "count": "$(ENTITY.count)",
+                "status": "$(ENTITY.status)"
             },
             "status-text": "OK",
             "headers": {

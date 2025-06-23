@@ -11,7 +11,7 @@
             "status": 200,
             "body": [
                 {   
-                    "uuidType": "$eq(REQUEST.QUERY-PARAMS.uuidType)",
+                    "uuidType": "$eq(REQUEST.PARAMETERS.QUERY.uuidType)",
                     "uuid": "$array_has(ENTITY.uuid)",
                     "$if": {
                         "$conditions": {

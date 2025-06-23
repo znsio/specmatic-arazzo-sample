@@ -76,7 +76,7 @@ cd workflow/
 Specmatic Arazzo can extrapolate a complete specification from the minimal one by filling in missing parameters, request bodies, and defining success and failure actions and outputs. To perform the extrapolation, execute:
 
 ```shell
-specmatic-arazzo extrapolate --spec=uuid_order_workflow.arazzo.yaml
+specmatic-arazzo extrapolate --spec=uuid_order_workflow.arazzo.yaml -o .
 ```
 After executing this command, you should see two new files generated in the `workflow/` directory:
 
