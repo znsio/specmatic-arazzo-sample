@@ -76,7 +76,7 @@ cd workflow/
 Specmatic Arazzo can extrapolate a complete specification from the minimal one by filling in missing parameters, request bodies, and defining success and failure actions and outputs. To perform the extrapolation, execute:
 
 ```shell
-specmatic-arazzo extrapolate --spec=uuid_order_workflow.arazzo.yaml -o .
+specmatic-arazzo extrapolate --spec-file=uuid_order_workflow.arazzo.yaml -o .
 ```
 After executing this command, you should see two new files generated in the `workflow/` directory:
 
@@ -88,7 +88,7 @@ After executing this command, you should see two new files generated in the `wor
 Once the specification is extrapolated, validate it to ensure that all parameters, request bodies, schemas, outputs, and actions are correctly defined. Run the following command to validate the extrapolated specification:
 
 ```shell
-specmatic-arazzo validate --spec=uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
+specmatic-arazzo validate --spec-file=uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
 ```
 
 **Tip:** For testing purposes, consider modifying the `email` field in the workflow inputs by removing its format specification. This alteration should trigger a validation failure, demonstrating the effectiveness of the validation process.
