@@ -65,18 +65,12 @@ This project uses `pytest` and `Specmatic` for contract testing.
 
 The `workflow/` directory contains a minimal Arazzo specification. The following instructions assume that you have the Specmatic Arazzo JAR file available and have aliased it as `specmatic-arazzo`.
 
-### Navigate to the `workflow/` Directory
-
-```shell
-cd workflow/
-```
-
 ### Extrapolating the Specification
 
 Specmatic Arazzo can extrapolate a complete specification from the minimal one by filling in missing parameters, request bodies, and defining success and failure actions and outputs. To perform the extrapolation, execute:
 
 ```shell
-specmatic-arazzo extrapolate --spec-file=uuid_order_workflow.arazzo.yaml -o .
+docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo extrapolate --spec-file=./workflow/uuid_order_workflow.arazzo.yaml -o ./workflow
 ```
 After executing this command, you should see two new files generated in the `workflow/` directory:
 
@@ -88,7 +82,7 @@ After executing this command, you should see two new files generated in the `wor
 Once the specification is extrapolated, validate it to ensure that all parameters, request bodies, schemas, outputs, and actions are correctly defined. Run the following command to validate the extrapolated specification:
 
 ```shell
-specmatic-arazzo validate --spec-file=uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
+docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo validate --spec-file=./workflow/uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
 ```
 
 **Tip:** For testing purposes, consider modifying the `email` field in the workflow inputs by removing its format specification. This alteration should trigger a validation failure, demonstrating the effectiveness of the validation process.
@@ -109,7 +103,7 @@ python run.py
 After initializing the services, run the workflow tests using `Specmatic Arazzo`. From within the `/workflow` directory, execute:
 
 ```shell
-specmatic-arazzo test
+docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo test --serverUrlIndex 1
 ```
 
 Upon completion of the tests, a detailed HTML report will be generated in the `workflow/build/reports/specmatic/html/index.html` directory. 
@@ -119,7 +113,7 @@ This report provides a comprehensive overview of the test outcomes, including a 
 To generate examples from the extrapolated specification, run the following command:
 
 ```shell
-specmatic-arazzo examples --spec=uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
+docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo examples --spec-file=./workflow/uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
 ```
 
 The generated examples will be placed in the parent directory of the specifications, specifically in the `central-repo` submodule folder.

@@ -2,9 +2,9 @@ version: 2
 contracts:
   - filesystem:
     provides:
-    - uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
+    - ./workflow/uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
   - filesystem:
-      directory: ../central_repo
+      directory: ./central_repo
     consumes:
     - specs:
         - io/specmatic/examples/store/openapi/api_order_v4.yaml
