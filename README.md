@@ -45,14 +45,14 @@ pip install -r requirements.txt
 ```
 
 ## Service Interactions
-The **BFF** service sends a request to the **UUID API** to retrieve a UUID for a customer based on the request payload. It subsequently uses this UUID to make a request to the **Order API**.
+The **[BFF](bff/)** service sends a request to the **[UUID API](uuid_api/)** to retrieve a UUID for a customer based on the request payload.
+It subsequently uses this UUID to make a request to the **[Order API](order_api)**.
 
-## Running Tests
-This project uses `pytest` and `Specmatic` for contract testing.
+### Running Contract Tests on the services that will be part of our workflow
 
-### Running Unit Tests
+Contract tests are run using `Specmatic` and `pytest`.
 
-- To run all tests:
+- To run contract tests across all three services ([BFF](bff/), [UUID API](uuid_api/) and [Order API](order_api)):
   ```shell
   pytest -v -s
   ```
@@ -61,36 +61,48 @@ This project uses `pytest` and `Specmatic` for contract testing.
   pytest tests/<service_folder> -v -s
   ```
 
-## Workflow Specification
+## Authoring Arazzo Workflow Specification
 
-The `workflow/` directory contains a minimal Arazzo specification. The following instructions assume that you have the Specmatic Arazzo JAR file available and have aliased it as `specmatic-arazzo`.
+The `workflow/` directory contains a [minimal Arazzo specification](workflow/uuid_order_workflow.arazzo.yaml) which only contains skeleton steps with references to `operations` (using `operationId`) from OpenAPI specifications of each of the services that are part of our workflow.
 
 ### Extrapolating the Specification
 
-Specmatic Arazzo can extrapolate a complete specification from the minimal one by filling in missing parameters, request bodies, and defining success and failure actions and outputs. To perform the extrapolation, execute:
+Specmatic Arazzo can extrapolate a complete Arazzo specification based on the above minimal one by filling in missing parameters, request bodies, and defining success and failure actions and outputs.
+To perform the extrapolation, execute:
 
 ```shell
 docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo extrapolate --spec-file=./workflow/uuid_order_workflow.arazzo.yaml -o ./workflow
 ```
-After executing this command, you should see two new files generated in the `workflow/` directory:
 
-1.  **Extrapolated Specification:** `uuid_order_workflow.arazzo_extrapolated.arazzo.yaml`
-2.  **Generated Inputs File:** `uuid_order_workflow.arazzo_extrapolated.arazzo_input.json`
+After executing this command, you should see two new files generated in the [`workflow/`](workflow/) directory:
+
+1. **Extrapolated Specification:** [`uuid_order_workflow.arazzo_extrapolated.arazzo.yaml`](workflow/uuid_order_workflow.arazzo_extrapolated.arazzo.yaml)
+2. **Generated Inputs File:** [`uuid_order_workflow.arazzo_extrapolated.arazzo_input.json`](workflow/uuid_order_workflow.arazzo_extrapolated.arazzo_input.json)
 
 ### Validating the Specification
 
-Once the specification is extrapolated, validate it to ensure that all parameters, request bodies, schemas, outputs, and actions are correctly defined. Run the following command to validate the extrapolated specification:
+Once the specification is extrapolated, validate it to ensure that all parameters, request bodies, schemas, outputs, and actions are correctly defined.
+Run the following command to validate the extrapolated specification:
 
 ```shell
 docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo validate --spec-file=./workflow/uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
 ```
 
-**Tip:** For testing purposes, consider modifying the `email` field in the workflow inputs by removing its format specification. This alteration should trigger a validation failure, demonstrating the effectiveness of the validation process.
+**Tip:** For testing purposes, consider removing the format of `email` field in the [extrapolated Arazzo API spec](workflow/uuid_order_workflow.arazzo_extrapolated.arazzo.yaml).
+This alteration should trigger a validation failure (as shown below), demonstrating the effectiveness of the validation process.
+
+```shell
+>> ARAZZO-SPEC.WORKFLOW.PlaceOrder.STEP.GetUUID
+   In scenario "Create a UUID. Response: Created"
+   API: POST /uuids -> 201
+     >> REQUEST.BODY.email
+        Expected email string, actual was string
+```
 
 ### Running the Workflow
 
-Before executing the workflow tests, verify that the input values in the Arazzo inputs file correspond with the seed data specified in `run.py`.
-The `productId` in `PlaceOrder` and the `id` in `RetrieveProductDetails` should be set to either 1 or 2.
+Before executing the workflow tests, verify that the input values in the [Arazzo inputs file](workflow/uuid_order_workflow.arazzo_extrapolated.arazzo_input.json) are in line with the seed data specified in `run.py`.
+The `productId` in `PlaceOrder` and the `id` in `RetrieveProductDetails` should be set to either `1` or `2`.
 
 #### Initialize Services and Populate Data
 Execute the `run.py` script from the root directory to initialize the required services and populate the database with product data:
@@ -100,20 +112,11 @@ python run.py
 ```
 
 #### Execute Workflow Tests
-After initializing the services, run the workflow tests using `Specmatic Arazzo`. From within the `/workflow` directory, execute:
+After initializing the services, run the workflow tests using `Specmatic Arazzo`.
 
 ```shell
 docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo test --serverUrlIndex 1
 ```
 
-Upon completion of the tests, a detailed HTML report will be generated in the `workflow/build/reports/specmatic/html/index.html` directory. 
+Upon completion of the tests, a detailed HTML report will be generated in the [`build/reports/specmatic/html/index.html`](build/reports/specmatic/html/index.html) directory. 
 This report provides a comprehensive overview of the test outcomes, including a workflow diagram and additional information.
-
-### Generating Examples
-To generate examples from the extrapolated specification, run the following command:
-
-```shell
-docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo examples --spec-file=./workflow/uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
-```
-
-The generated examples will be placed in the parent directory of the specifications, specifically in the `central-repo` submodule folder.
