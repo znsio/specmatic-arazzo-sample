@@ -11,7 +11,7 @@ All services are developed using **FastAPI**, **SQLModel**, and **SQLite** as th
 
 1. Clone the repository
 ```shell
-git clone https://github.com/znsio/specmatic-arazzo-sample.git
+git clone https://github.com/specmatic/specmatic-arazzo-sample.git
 ```
 
 2. Initialize and update the specmatic-order-contracts submodule
@@ -71,7 +71,7 @@ Specmatic Arazzo can extrapolate a complete Arazzo specification based on the ab
 To perform the extrapolation, execute:
 
 ```shell
-docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo extrapolate --spec-file=./workflow/uuid_order_workflow.arazzo.yaml -o ./workflow
+docker run --rm -v "$(pwd):/usr/src/app" specmatic/specmatic-arazzo extrapolate --spec-file=./workflow/uuid_order_workflow.arazzo.yaml -o ./workflow
 ```
 
 After executing this command, you should see two new files generated in the [`workflow/`](workflow/) directory:
@@ -85,7 +85,7 @@ Once the specification is extrapolated, validate it to ensure that all parameter
 Run the following command to validate the extrapolated specification:
 
 ```shell
-docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo validate --spec-file=./workflow/uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
+docker run --rm -v "$(pwd):/usr/src/app" specmatic/specmatic-arazzo validate --spec-file=./workflow/uuid_order_workflow.arazzo_extrapolated.arazzo.yaml
 ```
 
 **Tip:** For testing purposes, consider removing the format of `email` field in the [extrapolated Arazzo API spec](workflow/uuid_order_workflow.arazzo_extrapolated.arazzo.yaml).
@@ -115,7 +115,7 @@ python run.py
 After initializing the services, run the workflow tests using `Specmatic Arazzo`.
 
 ```shell
-docker run --rm -v "$(pwd):/usr/src/app" znsio/specmatic-arazzo test --serverUrlIndex 1
+docker run --rm -v "$(pwd):/usr/src/app" specmatic/specmatic-arazzo test --serverUrlIndex 1
 ```
 
 Upon completion of the tests, a detailed HTML report will be generated in the [`build/reports/specmatic/html/index.html`](build/reports/specmatic/html/index.html) directory. 
